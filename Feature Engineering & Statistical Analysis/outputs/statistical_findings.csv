@@ -1,0 +1,15 @@
+Feature,Analysis_Type,Statistical_Test,Adjusted_P_Value,Effect_Size,Effect_Size_Measure,Finding
+Fiber_Monthly_Risk,Categorical,Chi-square,3.924525905088924e-268,0.4182920551078242,Cramer's V,Strong association with churn (Cramer's V = 0.418).
+Contract,Categorical,Chi-square,7.035645960808069e-257,0.4101156965761409,Cramer's V,Strong association with churn (Cramer's V = 0.410).
+Is_Month_to_Month,Categorical,Chi-square,4.918068740439354e-252,0.40510291068798987,Cramer's V,Strong association with churn (Cramer's V = 0.405).
+Tenure_Band,Categorical,Chi-square,1.197560461774019e-198,0.362859201765909,Cramer's V,Moderate association with churn (Cramer's V = 0.363).
+New_Monthly_Customer,Categorical,Chi-square,4.803426000187634e-192,0.3532240877834759,Cramer's V,Moderate association with churn (Cramer's V = 0.353).
+New_High_Spend,Categorical,Chi-square,1.8240314417361057e-187,0.3490268680426405,Cramer's V,Moderate association with churn (Cramer's V = 0.349).
+Internet Service,Categorical,Chi-square,3.281755962116758e-159,0.32245455521230887,Cramer's V,Moderate association with churn (Cramer's V = 0.322).
+Is_New_Customer,Categorical,Chi-square,1.1040222020942132e-155,0.3175800722020233,Cramer's V,Moderate association with churn (Cramer's V = 0.318).
+Dependents,Categorical,Chi-square,6.669259732947616e-96,0.2485422264232831,Cramer's V,Moderate association with churn (Cramer's V = 0.249).
+Payment Method,Categorical,Chi-square,7.266894173486271e-69,0.2099020635913274,Cramer's V,Moderate association with churn (Cramer's V = 0.210).
+Tenure Months,Numerical,Welch t-test + Mann-Whitney U,4.7819781890428605e-232,-0.8522498343478222,Cohen's d,Values are lower among churned customers; large effect (Cohen's d = -0.852).
+Total Charges,Numerical,Welch t-test + Mann-Whitney U,1.1805161218144252e-74,-0.45821305166036236,Cohen's d,Values are lower among churned customers; small effect (Cohen's d = -0.458).
+Monthly Charges,Numerical,Welch t-test + Mann-Whitney U,1.14565991087294e-72,0.446283496963266,Cohen's d,Values are higher among churned customers; small effect (Cohen's d = 0.446).
+Support_Service_Count,Numerical,Welch t-test + Mann-Whitney U,5.372602273597038e-63,-0.3979059971369863,Cohen's d,Values are lower among churned customers; small effect (Cohen's d = -0.398).
