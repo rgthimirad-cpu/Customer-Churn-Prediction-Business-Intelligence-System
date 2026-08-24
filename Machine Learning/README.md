@@ -195,7 +195,7 @@ The churn probability output can be used by downstream components such as predic
 
 The Machine Learning component follows the structure below:
 
-```text
+```
 Machine Learning/
 │
 ├── machine_learning.ipynb
