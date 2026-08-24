@@ -163,6 +163,7 @@ predicted_class = model.predict(new_customer_data)
 churn_probability = model.predict_proba(
     new_customer_data
 )[:, 1]
+```
 
 ## 10. Prediction Output
 
@@ -195,7 +196,7 @@ The churn probability output can be used by downstream components such as predic
 
 The Machine Learning component follows the structure below:
 
-```
+```text
 Machine Learning/
 │
 ├── machine_learning.ipynb
