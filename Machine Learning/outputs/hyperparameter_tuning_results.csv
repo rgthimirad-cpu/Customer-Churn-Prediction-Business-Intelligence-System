@@ -1,0 +1,2 @@
+Model,Search Method,Refit Metric,CV Folds,Best C,Best Penalty,Best Solver,Best Class Weight,Best CV F1,CV Accuracy,CV Precision,CV Recall,CV ROC-AUC
+Logistic Regression,GridSearchCV,F1-score,5,100.0,l1,liblinear,balanced,0.6446,0.7622,0.5341,0.8134,0.8596
