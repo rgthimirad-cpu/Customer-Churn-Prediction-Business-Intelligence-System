@@ -1,0 +1,4 @@
+Risk_Category,Customer_Count,Mean_Churn_Prob,Min_Churn_Prob,Max_Churn_Prob,Percentage,Avg_Monthly_Charges,Avg_Tenure_Months,Avg_Total_Charges,Actual_Churn_Rate
+High Risk,2328,78.35,0.6,0.96,33.05,77.04,14.34,1270.38,58.25
+Low Risk,3217,11.3,0.0,0.3,45.68,55.75,47.0,2951.87,4.54
+Medium Risk,1498,45.92,0.3,0.6,21.27,65.03,28.99,2404.92,24.5
