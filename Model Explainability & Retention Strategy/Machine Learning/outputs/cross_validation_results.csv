@@ -1,4 +1,0 @@
-Model,Variant,Accuracy,Precision,Recall,F1-score,ROC-AUC,F1 CV Std,ROC-AUC CV Std
-DummyClassifier,Most Frequent Baseline,0.7346,0.0,0.0,0.0,0.5,0.0,0.0
-Logistic Regression,Baseline,0.8124,0.6743,0.5679,0.616,0.8597,0.0255,0.0125
-Logistic Regression,Tuned,0.7622,0.5341,0.8134,0.6446,0.8596,0.0237,0.0124

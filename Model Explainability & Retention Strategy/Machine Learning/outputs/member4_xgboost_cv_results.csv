@@ -1,6 +1,0 @@
-model_name,metric,cv_mean,cv_std,train_mean,train_std,fold_scores
-XGBoost_Initial,accuracy,0.8072,0.009,0.8407,0.0027,"[np.float64(0.8048), np.float64(0.7924), np.float64(0.8075), np.float64(0.8119), np.float64(0.8197)]"
-XGBoost_Initial,precision,0.6648,0.026,0.7356,0.0043,"[np.float64(0.6513), np.float64(0.6316), np.float64(0.6627), np.float64(0.668), np.float64(0.7105)]"
-XGBoost_Initial,recall,0.5538,0.0201,0.6242,0.0109,"[np.float64(0.5686), np.float64(0.5217), np.float64(0.5585), np.float64(0.5786), np.float64(0.5418)]"
-XGBoost_Initial,f1,0.6039,0.017,0.6753,0.0074,"[np.float64(0.6071), np.float64(0.5714), np.float64(0.6062), np.float64(0.6201), np.float64(0.6148)]"
-XGBoost_Initial,roc_auc,0.8582,0.0094,0.9065,0.0016,"[np.float64(0.8571), np.float64(0.8425), np.float64(0.8556), np.float64(0.8669), np.float64(0.8688)]"

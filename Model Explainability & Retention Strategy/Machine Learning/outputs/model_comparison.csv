@@ -1,6 +1,0 @@
-F1 Rank,Model,Accuracy,Precision,Recall,F1-score,ROC-AUC
-1,Tuned Logistic Regression,0.7622,0.5341,0.8134,0.6446,0.8596
-2,Weighted XGBoost,0.7568,0.5273,0.8174,0.6409,0.8634
-3,Tuned XGBoost,0.8136,0.6776,0.5692,0.6184,0.8632
-4,Tuned Decision Tree,0.7969,0.63,0.5719,0.5955,0.8321
-5,Tuned Random Forest,0.8039,0.6661,0.5251,0.5869,0.8579

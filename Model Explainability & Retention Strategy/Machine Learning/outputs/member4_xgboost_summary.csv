@@ -1,5 +1,0 @@
-model_name,stage,parameter_strategy,accuracy_mean,accuracy_std,precision_mean,precision_std,recall_mean,recall_std,f1_mean,f1_std,roc_auc_mean,roc_auc_std
-XGBoost_Initial,Initial,reference_defaults,0.8072,0.009,0.6648,0.026,0.5538,0.0201,0.6039,0.017,0.8582,0.0094
-XGBoost_Tuned,Tuned,RandomizedSearchCV_n40,0.8117,0.0133,0.672,0.0337,0.5692,0.0246,0.6161,0.0249,0.8631,0.0105
-XGBoost_Weighted,Weighted,RandomizedSearchCV_n40,0.7583,0.0142,0.5291,0.0186,0.8174,0.0303,0.6422,0.0194,0.8629,0.0104
-XGBoost_Weighted_TEST,test_held_out,final_test_evaluation,0.7523,,0.5215,,0.8102,,0.6346,,0.8527,
