@@ -1,0 +1,10 @@
+{
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}/Model Explainability & Retention Strategy/src",
+        "${workspaceFolder}/Model Explainability & Retention Strategy"
+    ],
+    "python.autoComplete.extraPaths": [
+        "${workspaceFolder}/Model Explainability & Retention Strategy/src",
+        "${workspaceFolder}/Model Explainability & Retention Strategy"
+    ]
+}
