@@ -1,0 +1,4 @@
+Segment,Customer_Count,Expected_Baseline_Churners,Customers_Saved_By_Campaign,Gross_CLTV_Preserved_USD,Retention_Campaign_Cost_USD,Net_Value_Created_USD,Campaign_ROI_Pct
+High Risk Cohort (Urgent Proactive),2328,1746.0,558.7,1396800.0,128040.0,1268760.0,990.91
+Medium Risk Cohort (Nudge & Education),1498,674.1,215.7,539280.0,37450.0,501830.0,1340.0
+Combined Retention Program (Total),3826,2420.1,774.4,1936080.0,165490.0,1770590.0,1069.91

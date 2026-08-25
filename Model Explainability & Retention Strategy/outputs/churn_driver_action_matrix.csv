@@ -1,0 +1,9 @@
+id,driver_pattern,driver_name,customer_segment,recommended_action,channel,urgency,expected_churn_reduction_pct,cost_per_customer
+ACT_01,Contract_Month-to-month,Month-to-Month Contract,Month-to-Month Subscribers with High Churn Risk,12/24-Month Long-Term Contract Incentive with $15/mo discount & streaming perk,In-App Notification / Email Campaign,High,40.0,60.0
+ACT_02,Internet Service_Fiber optic,Fiber Optic High Spend / Service Friction,Fiber Optic Users with Elevated Churn Probability,Personalized Value Plan Review + Speed Guarantee + Bundled Free Tech Support,Dedicated Account Specialist / Outbound Call,High,35.0,45.0
+ACT_03,New_Monthly_Customer,New / Short-Tenure Customer Risk,Early-Tenure Customers (<12 Months) on Month-to-Month Plans,Proactive VIP Digital Onboarding Concierge + 15% 6-Month Loyalty Discount,Personalized Welcome SMS / Concierge Call,Immediate,38.0,50.0
+ACT_04,Security_Tech_Bundle,Lack of Tech Support & Online Security,Broadband Users without Essential Support/Security Add-ons,3-Month Free Trial of 'CyberSafe & Premium Tech Support' Bundle,Self-Service Portal / Email Prompt,Medium,28.0,25.0
+ACT_05,Payment Method,Electronic Check / Billing Friction,Manual Electronic Check Bill Payers,$5 Recurring Monthly Bill Credit for Enrolling in Auto-Pay via Bank/Credit Card,Billing Portal Pop-up / SMS Reminder,Medium,22.0,20.0
+ACT_06,Dependents,Solo Account / Low Attachment Risk,Single-Line / Solo Subscribers without Family Attachment,Multi-Line Family Bundle Incentive + Dedicated Customer Care Line,Direct Mailer / Phone Call,Medium,25.0,30.0
+ACT_07,Tenure Months,Low Tenure / Early Lifecycle Risk,Customers in First 6-12 Months of Service,First-Year Milestone Loyalty Credit + Complimentary 3-Month Speed Upgrade,Email / App Banner,High,32.0,35.0
+ACT_DEFAULT,Default,General Retention Risk,General Elevated Churn Risk Customers,Personalized Customer Satisfaction Review + Exclusive 10% Service Voucher,Email / App Banner,Standard,20.0,25.0
