@@ -302,6 +302,7 @@ if predict:
         ]
     })
 
+    
     # Predict
 
     probability = model.predict_proba(
@@ -310,7 +311,9 @@ if predict:
 
     probability_percent = probability * 100
 
+    # ----------------------------------
     # Risk Level
+    # ----------------------------------
 
     if probability <= 0.30:
         risk_level = "LOW"
@@ -321,7 +324,52 @@ if predict:
     else:
         risk_level = "HIGH"
 
+    # ----------------------------------
+    # Risk Factors
+    # ----------------------------------
+
+    risk_factors = []
+
+    if tenure_months <= 12:
+        risk_factors.append("Short tenure")
+
+    if contract == "Month-to-month":
+        risk_factors.append("Month-to-month contract")
+
+    if monthly_charges >= 70:
+        risk_factors.append("High monthly charges")
+
+    if internet_service == "Fiber optic":
+        risk_factors.append("Fiber optic service")
+
+    if tech_support == "No":
+        risk_factors.append("No technical support")
+
+    # ----------------------------------
+    # Recommendation Logic
+    # ----------------------------------
+
+    if risk_level == "HIGH":
+
+        recommendation = (
+            "Provide a personalized retention offer, assign a customer support representative, and contact the customer immediately."
+        )
+
+    elif risk_level == "MEDIUM":
+
+        recommendation = (
+            "Offer loyalty incentives, monitor customer engagement, and provide targeted promotions."
+        )
+
+    else:
+
+        recommendation = (
+            "Maintain regular engagement and continue providing quality service."
+        )
+
+    # ----------------------------------
     # Results
+    # ----------------------------------
 
     st.divider()
 
@@ -341,12 +389,27 @@ if predict:
             risk_level
         )
 
+    # ----------------------------------
+    # Risk Factors
+    # ----------------------------------
+
     st.subheader("⚠ Main Risk Factors")
 
-    st.write("• To be integrated with Group 5 outputs")
+    if risk_factors:
+
+        for factor in risk_factors:
+            st.write(f"• {factor}")
+
+    else:
+
+        st.write(
+            "• No significant risk factors identified"
+        )
+
+    # ----------------------------------
+    # Recommendation
+    # ----------------------------------
 
     st.subheader("🎯 Recommended Action")
 
-    st.info(
-        "Retention recommendation will be integrated in the next version."
-    )
+    st.success(recommendation)
