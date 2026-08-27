@@ -52,6 +52,7 @@ st.header("👤 Customer Information")
 col1, col2 = st.columns(2)
 
 with col1:
+
     senior_citizen = st.selectbox(
         "Senior Citizen",
         ["Yes", "No"]
@@ -63,6 +64,7 @@ with col1:
     )
 
 with col2:
+
     dependents = st.selectbox(
         "Dependents",
         ["Yes", "No"]
@@ -85,6 +87,7 @@ st.header("🛠 Service Information")
 col1, col2 = st.columns(2)
 
 with col1:
+
     multiple_lines = st.selectbox(
         "Multiple Lines",
         ["Yes", "No"]
@@ -106,6 +109,7 @@ with col1:
     )
 
 with col2:
+
     device_protection = st.selectbox(
         "Device Protection",
         ["Yes", "No"]
@@ -137,6 +141,7 @@ st.header("💳 Billing Information")
 col1, col2 = st.columns(2)
 
 with col1:
+
     contract = st.selectbox(
         "Contract",
         [
@@ -152,6 +157,7 @@ with col1:
     )
 
 with col2:
+
     payment_method = st.selectbox(
         "Payment Method",
         [
@@ -213,96 +219,34 @@ if predict:
         and tech_support == "Yes"
     )
 
-    # Input DataFrame
+    # Input Data
 
     input_data = pd.DataFrame({
 
-        "Senior Citizen": [
-            yes_no_to_binary(senior_citizen)
-        ],
+        "Senior Citizen": [yes_no_to_binary(senior_citizen)],
+        "Partner": [yes_no_to_binary(partner)],
+        "Dependents": [yes_no_to_binary(dependents)],
+        "Tenure Months": [tenure_months],
+        "Multiple Lines": [yes_no_to_binary(multiple_lines)],
+        "Internet Service": [internet_service],
+        "Online Security": [yes_no_to_binary(online_security)],
+        "Online Backup": [yes_no_to_binary(online_backup)],
+        "Device Protection": [yes_no_to_binary(device_protection)],
+        "Tech Support": [yes_no_to_binary(tech_support)],
+        "Streaming TV": [yes_no_to_binary(streaming_tv)],
+        "Streaming Movies": [yes_no_to_binary(streaming_movies)],
+        "Contract": [contract],
+        "Paperless Billing": [yes_no_to_binary(paperless_billing)],
+        "Payment Method": [1],
+        "Monthly Charges": [monthly_charges],
+        "Total Charges": [total_charges],
+        "Fiber_Monthly_Risk": [fiber_monthly_risk],
+        "New_High_Spend": [new_high_spend],
+        "New_Monthly_Customer": [new_monthly_customer],
+        "Security_Tech_Bundle": [security_tech_bundle]
 
-        "Partner": [
-            yes_no_to_binary(partner)
-        ],
-
-        "Dependents": [
-            yes_no_to_binary(dependents)
-        ],
-
-        "Tenure Months": [
-            tenure_months
-        ],
-
-        "Multiple Lines": [
-            yes_no_to_binary(multiple_lines)
-        ],
-
-        "Internet Service": [
-            internet_service
-        ],
-
-        "Online Security": [
-            yes_no_to_binary(online_security)
-        ],
-
-        "Online Backup": [
-            yes_no_to_binary(online_backup)
-        ],
-
-        "Device Protection": [
-            yes_no_to_binary(device_protection)
-        ],
-
-        "Tech Support": [
-            yes_no_to_binary(tech_support)
-        ],
-
-        "Streaming TV": [
-            yes_no_to_binary(streaming_tv)
-        ],
-
-        "Streaming Movies": [
-            yes_no_to_binary(streaming_movies)
-        ],
-
-        "Contract": [
-            contract
-        ],
-
-        "Paperless Billing": [
-            yes_no_to_binary(paperless_billing)
-        ],
-
-        "Payment Method": [
-            1
-        ],
-
-        "Monthly Charges": [
-            monthly_charges
-        ],
-
-        "Total Charges": [
-            total_charges
-        ],
-
-        "Fiber_Monthly_Risk": [
-            fiber_monthly_risk
-        ],
-
-        "New_High_Spend": [
-            new_high_spend
-        ],
-
-        "New_Monthly_Customer": [
-            new_monthly_customer
-        ],
-
-        "Security_Tech_Bundle": [
-            security_tech_bundle
-        ]
     })
 
-    
     # Predict
 
     probability = model.predict_proba(
@@ -311,22 +255,25 @@ if predict:
 
     probability_percent = probability * 100
 
-    # ----------------------------------
     # Risk Level
-    # ----------------------------------
 
     if probability <= 0.30:
         risk_level = "LOW"
-
     elif probability <= 0.60:
         risk_level = "MEDIUM"
-
     else:
         risk_level = "HIGH"
 
-    # ----------------------------------
+    # Confidence Level
+
+    if probability >= 0.85:
+        confidence = "Very Strong"
+    elif probability >= 0.70:
+        confidence = "Strong"
+    else:
+        confidence = "Moderate"
+
     # Risk Factors
-    # ----------------------------------
 
     risk_factors = []
 
@@ -345,9 +292,9 @@ if predict:
     if tech_support == "No":
         risk_factors.append("No technical support")
 
-    # ----------------------------------
-    # Recommendation Logic
-    # ----------------------------------
+    top_factors = risk_factors[:3]
+
+    # Recommendations
 
     if risk_level == "HIGH":
 
@@ -375,7 +322,7 @@ if predict:
 
     st.header("📈 Prediction Results")
 
-    col1, col2 = st.columns(2)
+    col1, col2, col3 = st.columns(3)
 
     with col1:
         st.metric(
@@ -389,15 +336,29 @@ if predict:
             risk_level
         )
 
-    # ----------------------------------
+    with col3:
+        st.metric(
+            "Confidence",
+            confidence
+        )
+
+    st.progress(probability)
+
+    # Assessment
+
+    st.subheader("📋 Customer Assessment")
+
+    st.info(
+        f"This customer is classified as {risk_level} risk with a churn probability of {probability_percent:.2f}%. The prediction is based on customer profile, subscription characteristics, billing behavior and service usage patterns."
+    )
+
     # Risk Factors
-    # ----------------------------------
 
-    st.subheader("⚠ Main Risk Factors")
+    st.subheader("⚠ Top Churn Drivers")
 
-    if risk_factors:
+    if top_factors:
 
-        for factor in risk_factors:
+        for factor in top_factors:
             st.write(f"• {factor}")
 
     else:
@@ -406,9 +367,7 @@ if predict:
             "• No significant risk factors identified"
         )
 
-    # ----------------------------------
     # Recommendation
-    # ----------------------------------
 
     st.subheader("🎯 Recommended Action")
 
