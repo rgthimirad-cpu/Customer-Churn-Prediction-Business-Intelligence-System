@@ -1,4 +1,22 @@
 import streamlit as st
+import pandas as pd
+import joblib
+
+# ----------------------------------
+# Load Model
+# ----------------------------------
+
+model = joblib.load(
+    "Machine Learning/models/final_churn_pipeline.joblib"
+)
+
+# ----------------------------------
+# Helper Function
+# ----------------------------------
+
+def yes_no_to_binary(value):
+    return 1 if value == "Yes" else 0
+
 
 # ----------------------------------
 # Page Configuration
@@ -168,10 +186,142 @@ predict = st.button(
 )
 
 # ----------------------------------
-# Placeholder Results
+# Prediction
 # ----------------------------------
 
 if predict:
+
+    # Engineered Features
+
+    fiber_monthly_risk = int(
+        internet_service == "Fiber optic"
+        and contract == "Month-to-month"
+    )
+
+    new_high_spend = int(
+        tenure_months <= 12
+        and monthly_charges >= 70
+    )
+
+    new_monthly_customer = int(
+        tenure_months <= 12
+        and contract == "Month-to-month"
+    )
+
+    security_tech_bundle = int(
+        online_security == "Yes"
+        and tech_support == "Yes"
+    )
+
+    # Input DataFrame
+
+    input_data = pd.DataFrame({
+
+        "Senior Citizen": [
+            yes_no_to_binary(senior_citizen)
+        ],
+
+        "Partner": [
+            yes_no_to_binary(partner)
+        ],
+
+        "Dependents": [
+            yes_no_to_binary(dependents)
+        ],
+
+        "Tenure Months": [
+            tenure_months
+        ],
+
+        "Multiple Lines": [
+            yes_no_to_binary(multiple_lines)
+        ],
+
+        "Internet Service": [
+            internet_service
+        ],
+
+        "Online Security": [
+            yes_no_to_binary(online_security)
+        ],
+
+        "Online Backup": [
+            yes_no_to_binary(online_backup)
+        ],
+
+        "Device Protection": [
+            yes_no_to_binary(device_protection)
+        ],
+
+        "Tech Support": [
+            yes_no_to_binary(tech_support)
+        ],
+
+        "Streaming TV": [
+            yes_no_to_binary(streaming_tv)
+        ],
+
+        "Streaming Movies": [
+            yes_no_to_binary(streaming_movies)
+        ],
+
+        "Contract": [
+            contract
+        ],
+
+        "Paperless Billing": [
+            yes_no_to_binary(paperless_billing)
+        ],
+
+        "Payment Method": [
+            1
+        ],
+
+        "Monthly Charges": [
+            monthly_charges
+        ],
+
+        "Total Charges": [
+            total_charges
+        ],
+
+        "Fiber_Monthly_Risk": [
+            fiber_monthly_risk
+        ],
+
+        "New_High_Spend": [
+            new_high_spend
+        ],
+
+        "New_Monthly_Customer": [
+            new_monthly_customer
+        ],
+
+        "Security_Tech_Bundle": [
+            security_tech_bundle
+        ]
+    })
+
+    # Predict
+
+    probability = model.predict_proba(
+        input_data
+    )[0][1]
+
+    probability_percent = probability * 100
+
+    # Risk Level
+
+    if probability <= 0.30:
+        risk_level = "LOW"
+
+    elif probability <= 0.60:
+        risk_level = "MEDIUM"
+
+    else:
+        risk_level = "HIGH"
+
+    # Results
 
     st.divider()
 
@@ -182,20 +332,18 @@ if predict:
     with col1:
         st.metric(
             "Churn Probability",
-            "-- %"
+            f"{probability_percent:.2f}%"
         )
 
     with col2:
         st.metric(
             "Risk Level",
-            "--"
+            risk_level
         )
 
     st.subheader("⚠ Main Risk Factors")
 
     st.write("• To be integrated with Group 5 outputs")
-    st.write("• Placeholder")
-    st.write("• Placeholder")
 
     st.subheader("🎯 Recommended Action")
 
