@@ -1,6 +1,12 @@
 import streamlit as st
 import pandas as pd
 import joblib
+import base64
+
+import base64
+
+with open("prediction-interface/assets/logo.png", "rb") as image_file:
+    logo_base64 = base64.b64encode(image_file.read()).decode()
 
 # ----------------------------------
 # Load Model
@@ -24,22 +30,148 @@ def yes_no_to_binary(value):
 
 st.set_page_config(
     page_title="Customer Churn Prediction",
-    page_icon="📊",
+    page_icon="prediction-interface/assets/logo.png",
     layout="wide"
+)
+
+def get_base64(img_path):
+    with open(img_path, "rb") as f:
+        data = f.read()
+    return base64.b64encode(data).decode()
+
+
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+image_path = os.path.join(
+    BASE_DIR,
+    "assets",
+    "background.jpg"
+)
+
+img = get_base64(image_path)
+
+
+st.markdown(
+    f"""
+    <style>
+
+    .stApp {{
+        background:
+            linear-gradient(
+                rgba(0,0,40,0.35),
+                rgba(0,0,40,0.35)
+            ),
+            url("data:image/jpg;base64,{img}");
+
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }}
+
+    .block-container {{
+        padding-top: 2rem;
+        max-width: 1350px;
+    }}
+
+    h1 {{
+        color: white !important;
+        text-align: center;
+        font-size: 3.5rem !important;
+        text-shadow: 0 0 20px #00E5FF;
+    }}
+
+    h2 {{
+        color: #00E5FF !important;
+        font-weight: bold;
+    }}
+
+    h3 {{
+        color: #FF4FD8 !important;
+    }}
+
+    div[data-baseweb="select"] > div {{
+        background: rgba(255,255,255,0.08);
+        border: 1px solid rgba(0,229,255,0.3);
+        border-radius: 12px;
+    }}
+
+    .stNumberInput input {{
+        background: rgba(255,255,255,0.08) !important;
+        color: white !important;
+        border-radius: 12px;
+    }}
+
+    .stButton > button {{
+        background: linear-gradient(
+            90deg,
+            #00E5FF,
+            #7B61FF,
+            #FF4FD8
+        );
+        color: white;
+        border: none;
+        border-radius: 15px;
+        height: 65px;
+        font-size: 22px;
+        font-weight: bold;
+        box-shadow: 0 0 25px rgba(123,97,255,0.7);
+    }}
+
+    .stButton > button:hover {{
+        transform: scale(1.02);
+        transition: 0.3s;
+        box-shadow: 0 0 35px #FF4FD8;
+    }}
+
+    div[data-testid="metric-container"] {{
+        background: rgba(15,20,60,0.45);
+        border: 1px solid rgba(0,229,255,0.2);
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        padding: 20px;
+        box-shadow: 0 0 20px rgba(0,229,255,0.15);
+    }}
+
+    .stProgress > div > div > div > div {{
+        background: linear-gradient(
+            90deg,
+            #00E5FF,
+            #7B61FF,
+            #FF4FD8
+        );
+    }}
+
+    </style>
+    """,
+    unsafe_allow_html=True
 )
 
 # ----------------------------------
 # Header
 # ----------------------------------
 
-st.title("📊 Customer Churn Prediction System")
+st.markdown(f"""
+<div style="
+background: rgba(15,20,60,0.45);
+backdrop-filter: blur(15px);
+padding:30px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 0 25px rgba(0,229,255,0.2);
+">
 
-st.markdown(
-    """
-    Predict whether a customer is likely to churn and
-    receive risk classification and retention recommendations.
-    """
-)
+<h1>
+<img src="data:image/png;base64,{logo_base64}" width="50" style="vertical-align:middle;font-size:22px;
+color:white;
+">Customer Churn Prediction System</h1>
+<p style="font-size:22px; color:white;">
+Predict customer churn using AI and generate retention strategies.
+</p>
+
+</div>
+""", unsafe_allow_html=True)
 
 st.divider()
 
@@ -47,7 +179,16 @@ st.divider()
 # Customer Information
 # ----------------------------------
 
-st.header("👤 Customer Information")
+st.markdown("""
+<h2 style='
+text-align:center;
+color:#00E5FF;
+margin-bottom:30px;
+'>
+👤 Customer Information
+</h2>
+""", unsafe_allow_html=True)
+
 
 col1, col2 = st.columns(2)
 
@@ -82,7 +223,15 @@ with col2:
 
 st.divider()
 
-st.header("🛠 Service Information")
+st.markdown("""
+<h2 style='
+text-align:center;
+color:#00E5FF
+margin-bottom:30px;
+'>
+🛠 Service Information
+</h2>
+""", unsafe_allow_html=True)
 
 col1, col2 = st.columns(2)
 
@@ -136,7 +285,15 @@ with col2:
 
 st.divider()
 
-st.header("💳 Billing Information")
+st.markdown("""
+<h2 style='
+text-align:center;
+color:#00E5FF;
+margin-bottom:30px;
+'>
+💳 Billing Information
+</h2>
+""", unsafe_allow_html=True)
 
 col1, col2 = st.columns(2)
 
@@ -196,6 +353,24 @@ predict = st.button(
 # ----------------------------------
 
 if predict:
+    errors = []
+
+    if total_charges < monthly_charges:
+        errors.append(
+            "Total Charges must be greater than or equal to Monthly Charges."
+        )
+
+    if tenure_months > 0 and total_charges == 0:
+        errors.append(
+            "Total Charges can not be zero when tenure is greater than zero."
+        )
+
+    if errors:
+        for error in errors:
+            st.error(error)
+
+        st.stop()
+
 
     # Engineered Features
 
@@ -320,7 +495,15 @@ if predict:
 
     st.divider()
 
-    st.header("📈 Prediction Results")
+    st.markdown("""
+<h2 style='
+text-align:center;
+color:#00E5FF;
+margin-bottom:30px;
+'>
+📈 Prediction Results
+</h2>
+""", unsafe_allow_html=True)
 
     col1, col2, col3 = st.columns(3)
 
